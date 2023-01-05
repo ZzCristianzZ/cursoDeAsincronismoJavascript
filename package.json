@@ -1,0 +1,17 @@
+{
+  "name": "cursodeasincronismojavas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/callback/challenge.js"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Cristian Lopez crisfegomez@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
