@@ -1,0 +1,23 @@
+<h1>Try And Catch</h1>
+
+<p>Otra forma de hacer que async/await espere a varios llamados a la vez es con la estructura: Try /Catch:</p>
+
+<ul>
+    <li>La palabra reservada try consiste en un bloque que contiene una o más sentencias, como hacíamos con resolve.
+        Su cuerpo está conformado por las llaves {} las cuales se deben utilizar siempre, incluso para un bloque de una sola sentencia.</li>
+    <li>También puede estar presente un bloque con la palabra reservada catch.</li>
+    <li>Un bloque catch es opcional (como hacíamos con reject) y contiene sentencias que especifican que hacer si una excepción es lanzada en el bloque try.</li>
+    <li>Si no se lanza ninguna excepción en el bloque try, el bloque catch se omite.
+        .</li>
+    
+</ul>
+
+<h2>Salida del Codigo</h2>
+
+<ul>
+    <li>Cuando se ejecuta console.log(products); en fetchData se solicita todos los productos de la API con ${urlApi}/products es por eso que vemos en la salida una larga lista de bloques entre corchetes [] y separados por llaves {}.</li>
+    <li>Cuando se ejecuta console.log(product.title); en fetchData se solicita el título de un producto en particular accediendo al atributo title, para ello tenemos que con ${urlApi}/products/${products[0].id} el cero 0 indica la posición de products que acabamos de almacenar la lista de productos, pero debe finalizar con id porque esa es la forma para acceder al objeto con ese identificador en la posición cero.</li>
+    <li>Si solo colocamos ${urlApi}/products/${products[0]} sin el .id, en la consola tendríamos un error de tipo: TypeError: Cannot read properties of undefined (reading 'id') así que no podemos acceder.
+        .</li>
+    <li>Cuando se ejecuta console.log(category.name); en fetchData se solicita el nombre de la categoría que corresponda al producto que se llamó anteriormente, para ello tenemos ${urlApi}/categories/${product.category.id} y no es necesario indicar la posición porque por cada producto, solo hay un bloque de categoría.</li>
+</ul>

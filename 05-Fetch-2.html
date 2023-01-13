@@ -1,0 +1,20 @@
+<h1>Fectch</h1>
+
+<p>Por medio de Fetch se puede realizar peticiones HTTP asíncronas de JavaScript (JS) con promesas. La API Fetch proporciona una interfaz JS más cómoda para acceder y manipular; fetch() es un método global.
+.</p>
+<p>🛠️ Para poder usar fetch, primero tenemos que instalarlo:
+
+
+Ir a la terminal e instalar fetch con: npm i node-fetch
+Para poder compilar desde VSC, debemos registrar el modulo en package.json, abrimos el archivo y al final se agrega:</p>
+
+<h3>npm i node-fetch</h3>
+<p>Para poder compilar desde VSC, debemos registrar el modulo en package.json, abrimos el archivo y al final se agrega:
+    "type": "module"
+    Importante agregar una coma (,) a la llave que cierra a “dependencies”.
+    En la ruta src/promise crear el archivo challenge.js
+    En el archivo challenge.js inicialmente se debe importar lo que acabamos de instalar, agregando el código: import fetch from 'node-fetch';
+    Dado que la API es una constante, nunca va a cambiar, por convección se coloca en letras mayúsculas: const API = 'https://api.escuelajs.co/api/v1';
+    Ahora se crea la lógica con fetch, then y catch:</p>
+
+    

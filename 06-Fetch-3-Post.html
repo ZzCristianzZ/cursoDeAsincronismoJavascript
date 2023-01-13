@@ -1,0 +1,22 @@
+<h1>FETCH POST</h1>
+
+<P>Los verbos indican acciones, estás acciones están asociadas a peticiones y recursos. En línea general sirve para la manipulación de recursos cliente/servidor. Los códigos de estados, los códigos son valores números que tienen un valor semántico.</P>
+
+<ul>
+    <li>GET → Sirve para solicitar recurso.</li>
+    <li>POST → Sirve para la creación de recursos en el servidor.</li>
+    <li>PUT → Sirve actualizar por completo un recurso.</li>
+    <li>DELETE → Sirve para eliminar un recurso.</li>
+</ul>
+
+<p>En el ejemplo de la clase se usa POST para guardar (enviar a la API) información en lugar de obtener con GET (recibir). Hay permisos que se deben tomar en cuenta para que el intercambio sea seguro, hay que especificar el modo (mode), aquí se indica si se permite solicitudes de origen cruzado.</p>
+
+<h2>¿Qué es un origen cruzado?</h2>
+
+<p>Un origen tiene dominio/protocolo/puerto, un origen cruzado denominado “Cross Origin” es la palabra que se utiliza para denominar el tipo de peticiones que se realizan a un dominio diferente del dominio de origen desde donde se realiza la petición.
+    Así que si se coloca cors, indica que se permiten ciertas solicitudes predeterminadas de origen cruzado como GET y POST para salvaguardar y evitar manipulaciones maliciosas.</p>
+
+ <h2>¿Cómo ver la salida después del POST?</h2>   
+
+<p>En el OUTPUT de la consola de VSC si todo está OK no debería salir un 400 (Bad Request).
+    Para ver el objeto creado en el navegador, copiamos la dirección: https://api.escuelajs.co/api/v1/products/ y colocamos al final el número arrojado por la id del OUTPUT, si el id es 271, sería: https://api.escuelajs.co/api/v1/products/271</p>
