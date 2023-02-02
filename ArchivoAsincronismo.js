@@ -57,7 +57,7 @@
 //con solo .then se obtiene el resultado de la promesa de acuerdo a resolve o reject
 //con .catch podemos obtener más información de un futuro error que se presente
 //con .finally podemos imprimir un mensaje que indica que ya se ejecutó la promesa.
-
+//------------------------------------------------------------
 
 //QUE ES FETCH?
 // Fetch : Es una API (Interfas de Programacion Grafica), Que proporciona una forma estandar y mas sencilla para realizar solicitudes HTTP por medio de promesas de ECMAScript 6. Sirve para asincrono como sincrono. Y Permite recuperar recursos en forma binaria(Imagenes, audios y videos).
@@ -133,8 +133,56 @@ fetchData(`${API}/products`)
     .catch(err => console.log(err)) //detectar un error
     .finally(() => console.log('Finally')); //es opcional para mostrar que se terminó la solicitud
 
+//-----------------------------------------------------------------
+    // METODO FETCH POST, En el que enviamos informacion al servidor.
+
+// Se utilizan los verbos que indican acciones, Get => Sirve para solicitar un recurso, POST => sirve para la creacion de recursos en el servidor.PUT => Sirve actualizar por completo un recurso. DELETE => sirve para eliminar un recurso.
+
+
+// A la hora de enviar datos (POST), se debe tener en cuenta varias cosa cmo los permisos para que el intercambio sea seguro, hay que especificar el modo (mode).
+
+// QUE ES UN ORIGEN CRUZADO
+// Un origen tiene dominio/protocolo/puerto, un origen cruzado denominado "Cross Origin", es la palabra que se utiliza para denominar el tipo de peticiones que se realizan a un dominio diferente de origen desde donde se realiza la peticion. Asi que se coloca cors, indica que se permiten solicitudes predeterminadas de origen cruzado como GET y POST.
 
 
 
+import fetch from 'node-fetch';
+//const API = 'https://api.escuelajs.co/api/v1';
+// Esta es la misma API que definimos mas arriba.
+
+function postData(urlApi, data) {
+    //ya no se solicita informarción si no se guardará información
+    //Esta función se encarga de realizar una petición POST a una URL especificada. Esa URL se recibe como parámetro (urlApi), al igual que los datos a enviar (data).
+    const response = fetch(urlApi, {
+        //Esta función se encarga de realizar una petición POST a una URL especificada. Esa URL se recibe como parámetro (urlApi), al igual que los datos a enviar (data).
+        method: 'POST', //tiene que ir en mayúscula
+        mode: 'cors', //cors es el permiso que va a tener, por defecto va estar siempre en cors
+        credentials: 'same-origin', //es opcional
+        headers:{
+            'Content-Type': 'application/json' //necesario indicar que lo que se está enviando es de tipo json
+        },
+        body: JSON.stringify(data) //El body de la petición será los datos que se reciben como parámetro, los cuales se convierten a formato JSON.el método JSON.stringify() convierte un objeto o valor de JavaScript en una cadena de texto JSON
+    });
+    return response;//Una vez creado el objeto de respuesta, se devuelve como resultado de la función.
+
+}
+
+//En https://fakeapi.platzi.com/doc/products se consigue la estructura de como debe ser el objeto que se quiere crear con POST.A continuación se crea un objeto "data" el cual contendrá los datos a enviar.
+const data = {
+    "title": "Nunca pares de aprender",
+    "price": 2,
+    "description": "A description",
+    "categoryId": 1,
+    "images": ["https://placeimg.com/640/480/any"]
+}
+
+//podemos usar el postData como una promesa y con .then obtener la respuesta como un objeto json y mostrarlo después en la consola
+
+//Por último se realiza la petición POST a la URL recibida junto con los datos.
+//El resultado de la petición se convierte a formato JSON y se imprime en consola.
+
+postData(`${API}/products`, data)
+    .then(response => response.json())
+    .then(data => console.log(data));
 
 
