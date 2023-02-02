@@ -1,23 +1,23 @@
-const  XMLHttpRequest = require ('xmlhttprequest').XMLHttpRequest;
-const API = 'https//api.escuelajs.co/api/v1';
-
-function fetchData (urlApi, callback){
-    let xhhtp = new XMLHttpRequest();
-
-    xhhtp.open ('GET', urlApi, true);
-
-    xhhtp.onreadystatechange = function(event){
-        if (xhhtp.onreadystatechange === 4){
-            if (xhhtp.status === 200){
-                callback(null, JSON.parse(xhhtp.responseText))
-            }else{
-                const error = new Error('Error' + urlApi);
-                return callback(error, null);
-            }
-        }
-    }
-    xhhtp.send();
-}
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; // instanciamos xmlhttprequest.
+const API = 'https://api.escuelajs.co/api/v1'; // API donde vamos a traer los datos.
+// estados: 0 no iniciado - 1 cargando, aún no se llama a send - 2 cuando ya se ejecuto send
+// 3 interactuando con la solicitud - 4 se ha completado la llamada.
+// status: 200 solicitud correcta - 400 errores - 500 errores del servidor.
+function fetchData(urlApi, callback) { // función donde generamos la conexión, recibe urlApi y un callback.
+    let xhttp = new XMLHttpRequest(); // generamos una nueva instancia más corta en xhttp.
+    xhttp.open('GET', urlApi, true); // abrimos una conexión con el método GET, urlApi y true para asincronismo.
+    xhttp.onreadystatechange = function (event) { // cuando este cambio suceda, escuchamos el estado:
+        if (xhttp.readyState === 4) { // comparamos el estado que sea igual a 4 (completado).
+            if (xhttp.status === 200) { // comparamos el estatus sea igual a 200 (solicitud correcta).
+                callback(null, JSON.parse(xhttp.responseText)); // retornamos callback null en error. Parse de datos.
+            } 
+        }else { // si lo anterior no ocurre:
+            const error = new Error('Error' + urlApi); // generamos un nuevo error + urlApi.
+            return callback(error, null); // retornamos callback con el error y null(para los datos).
+        };
+    };
+    xhttp.send(); // Enviamos el llamado o solitud.
+};
 
 fetchData(`${API}/products`, function(error1,data1){
     if (error1) return console.error(error1);
