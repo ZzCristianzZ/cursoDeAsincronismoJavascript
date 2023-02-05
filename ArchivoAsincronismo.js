@@ -222,3 +222,34 @@ After
 Async!!
 Hello!
 */
+
+// ---------------------------------------------------------------
+ // TRY AND CATCH 
+ // Es una estructura de control en JavaScript que permite recuperar errores o exepciones que se produzcan durante la ejecucion de un programa.
+ //TRY => Se usa para contener el codigo que se quiere ejecutar y que podria generar algun tipo de error.
+ // CATCH => Se utilica para atrapar cualquier error que se genere en el bloque TRY, Que recibe como argumento un objeto de error que contiene informacion sobre el mismo.
+ //  QUE ES UNA ESTRUCTURA DE CONTROL?
+ // Es una secuencia de instrucciones que le dice al navegador como ejecutar una accion particular, Estas pueden contener bucles, condicionales y otros elementos que permitan a los desarrolladores controlar el flujo de ejecucion de la aplicacion.
+
+ //Ejemplo:
+
+try {
+  // Aquí va el código que se quiere ejecutar 
+  // y que puede generar un error
+  var x = y + z;
+} catch (error) {
+  // Esta parte se ejecuta si se produce algún error
+  console.log(error); 
+}
+
+// EJEMPLO LAS PETICIONES DE LAS ANTERIORES CLASES
+
+import fetch from 'node-fetch';
+const API  = 'https://api.escuelajs.co/api/v1';
+
+async function fetchData(urlApi){
+    const response = await fetch (urlApi);
+    const data = await response.json();
+    return data;
+}
+
