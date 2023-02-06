@@ -275,7 +275,7 @@ async function fetchData(urlApi){
 }
 //Esta seria la segunda parte en donde creamos la segunda funcion que es donde iremos haciendo los llamados, PRIMERO => traemos todos los productos que contiene la API, por eso se hace el llamado a la funcion "fetchData", y agregamos el enpoint anteriormente mencionado.
 
-const anotherFunction = async (urlApi){
+const anotherFunction = async (urlApi) => {
     try {
         const products = await fetchData(`${urlApi}/products`);// PRIMERO
         const product = await fetchData(`${urlApi}/products/${products[0].id}`);//En este llamado necesitamos de todos los productos uno solo, por lo que agregamos el Id 0 que indica el primer producto de las base de productos que tiene el mismo nombre en la variable 
