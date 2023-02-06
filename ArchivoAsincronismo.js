@@ -242,14 +242,102 @@ try {
   console.log(error); 
 }
 
+// Importante recordar que la estructura de async/await se compone por las palabras reservadas async y await:
+// .
+
+// La palabra async se coloca antes de la función (la otra forma es con funciones flecha en que el async va antes que los argumentos).
+// La palabra await se utiliza dentro de las funciones async.
+// .
+// 🖇️ Otra forma de hacer que async/await espere a varios llamados a la vez es con la estructura: Try /Catch:
+// .
+
+// La palabra reservada try consiste en un bloque que contiene una o más sentencias, como hacíamos con resolve.
+// Su cuerpo está conformado por las llaves {} las cuales se deben utilizar siempre, incluso para un bloque de una sola sentencia.
+// También puede estar presente un bloque con la palabra reservada catch.
+// Un bloque catch es opcional (como hacíamos con reject) y contiene sentencias que especifican que hacer si una excepción es lanzada en el bloque try.
+// Si no se lanza ninguna excepción en el bloque try, el bloque catch se omite.
+
+
+
+
 // EJEMPLO LAS PETICIONES DE LAS ANTERIORES CLASES
+//  En este ejemplo lo que queremos es consumir la API, y traer todos los productos, filtrar el nombre de un producto y categoria a la que pertenece.
+
+// En primera parte, estamos creando una funcion "principal", para consumir la API. Recordemos que la variable API, es solo la url Base, es decir que si deseamos algun recurso (como products, categories, etc), necesitamo un endpoint.
 
 import fetch from 'node-fetch';
-const API  = 'https://api.escuelajs.co/api/v1';
+//const API  = 'https://api.escuelajs.co/api/v1'; Esta es la misma variable que contiene la direccion API de la Fake API de Platzi, pero que dejamos comentada ya que en los anteriores ejemplos ya esta declarada.
 
 async function fetchData(urlApi){
-    const response = await fetch (urlApi);
-    const data = await response.json();
+    const response = await fetch (urlApi);// Consumimos la API, nos devuelve un formato que no podemos trabajar en JS
+    const data = await response.json();// convertimos es formato json (objetos y arrays) para manipularlo. JSON => JavaScript Object Notation, esun formato de texto ligero y facil de leer para intercambiar datos.
     return data;
 }
+//Esta seria la segunda parte en donde creamos la segunda funcion que es donde iremos haciendo los llamados, PRIMERO => traemos todos los productos que contiene la API, por eso se hace el llamado a la funcion "fetchData", y agregamos el enpoint anteriormente mencionado.
 
+const anotherFunction = async (urlApi){
+    try {
+        const products = await fetchData(`${urlApi}/products`);// PRIMERO
+        const product = await fetchData(`${urlApi}/products/${products[0].id}`);//En este llamado necesitamos de todos los productos uno solo, por lo que agregamos el Id 0 que indica el primer producto de las base de productos que tiene el mismo nombre en la variable 
+        const category = await fetchData(`${urlApi}/categories/${product.category.id}`);// toda la informacion para acceder a los diferentes endpoint esta en la documentacion de la API.En este caso estamos llamando el obj category, dentro del obj producto por el id.
+
+        console.log(products);
+        console.log(product.title);
+        console.log(category.name);
+
+    } catch{
+        console.error(error);
+    }
+}
+
+anotherFunction(API);
+
+// EJEMPLO SIN LA EXPLICACION
+
+// //import fetch from 'node-fetch';
+// //const API  = 'https://api.escuelajs.co/api/v1'; Esta es la misma variable que contiene la direccion API de la Fake API de Platzi, pero que dejamos comentada ya que en los anteriores ejemplos ya esta declarada.
+
+// async function fetchData(urlApi){
+//     const response = await fetch (urlApi);
+//     const data = await response.json();
+//     return data;
+// }
+
+// const anotherFunction = async (urlApi){
+//     try {
+//         const products = await fetchData(`${urlApi}/products`);
+//         const product = await fetchData(`${urlApi}/products/${products[0].id}`);
+//         const category = await fetchData(`${urlApi}/categories/${product.category.id}`);
+//     } catch{
+//         console.error(error);
+//     }
+// }
+
+// anotherFunction(API);
+
+// GENERADORES 
+// Son funciones que permiten el flujo de control mas flexible.Estas permiten una pausa en la ejecucion y renaduar en el punto que quedo.
+
+// Su estructura consta de la palabras clave function seguido del *, y el resultado que se quiere obtener se coloca al derecho de la palabra clave yield.
+
+// Para poder Iterar con un generador, se puede inicializar un valor con la funcion generadora
+// const tg =  gen();
+
+// Uso del metodo next en el objeto del generador
+// next() permite acceder a la funcion generadora y obtener con yield el siguiente valor.
+
+//Declaración de la función del Generador pasando un argumento
+function* iterate(array){
+    for(let value of array){ //El loop del for revisa cada elemento del array
+        yield value; //value es asignado en cada ciclo
+    }
+}
+
+const it = iterate(['Oscar', 'Omar', 'Ana', 'Lucia', 'Juan']); // Se llama la funcion con el array dentro que va a iterar nuestro bucle.
+
+//la diferencia con el ejemplo anterior es que el iterador se le pasa un argumento
+console.log(it.next().value); //Imprime el primer elemento del array: Oscar
+console.log(it.next().value); //Imprime el segundo elemento del array: Omar
+console.log(it.next().value);
+console.log(it.next().value);
+console.log(it.next().value); //Si se coloca un sexto console, la consola indica "Undefined"
